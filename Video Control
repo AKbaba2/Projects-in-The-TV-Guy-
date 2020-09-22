@@ -1,0 +1,156 @@
+/**              IMPORTANT                **/
+/** NEVER EVER MAKE THE SPEED VARIABLE 0  **/
+/** NO JOKE, IT WILL CRASH YOUR COMPUTER  **/
+//             A VIDEO TEMPLATE             \\
+/* Here is what you can do!
+
+1. You can pause and start by pressing the triangle or 2 rectangles.
+
+2. You can make the bar disappear by moving your mouse outside of the canvas.
+
+3. You can change the speed of the video by changing the speed variable. The lower the slower, the higher the faster.
+
+4. You can click on the line track to go to a specific time.
+
+5. You can click and drag the red line to a specific time.
+
+6. You can hover your mouse on top of the track to see the seconds.
+*/
+var controlForCreator = true;
+var redlinetime=90;
+var play = false;
+var visibilitybar = 255;
+var speed = 1;//Never 0!
+var stopsignvisib = 0;
+var startsignvisib = 0;
+
+var startstopbar = function() {
+    textAlign(CENTER,CENTER);
+    noStroke();
+    fill(171, 171, 171, visibilitybar);
+    rect(50,height-50,width-80,30,20);//grey bar background
+    fill(0, 0, 0, visibilitybar);
+    textSize(15);
+    text(round(((redlinetime-90)/60)/speed),width-47,height-35);
+    if (play===false) {
+        visibilitybar=255;
+        triangle(75,height-35,60,height-25,60,height-45);
+    } else {
+        rect(60,height-43,5,15);
+        rect(69,height-43,5,15);
+    }
+    stroke(130, 130, 130, visibilitybar);
+    strokeWeight(10);
+    line(90,height-35,width-70,height-35);//line background
+    stroke(255, 0, 0, visibilitybar);
+    line(90,height-35,redlinetime,height-35);//535 - red one
+    stroke(200, 0, 0, visibilitybar);
+    point(redlinetime+1,height-35);
+    
+    if (mouseX>90 && mouseX<width-65 && mouseY>height-40 && mouseY<height-30) {
+        fill(0, 0, 0);
+        noStroke();
+        triangle(mouseX,height-40,mouseX-10,height-50,mouseX+10,height-50);
+        rect(mouseX-20,height-70,40,20);
+        fill(255, 255, 255);
+        textSize(12);
+        if (controlForCreator===false) {
+        text(round(((mouseX-90)/60)/speed),mouseX,height-59);
+        } else {
+            text(mouseX+"="+round(((mouseX-90)/60)/speed),mouseX,height-59);
+        }
+    }
+    
+    if (play===true) {
+        redlinetime+=speed;
+    }
+    
+    if (play===true && redlinetime>=width-65) {
+        play=false;
+        redlinetime=90;
+    }
+    
+    if (mouseY<=10 || mouseY>=height-10 || mouseX<=10 || mouseX>=width-10) {
+        visibilitybar-=5;
+    } else {
+        visibilitybar=255;
+    }
+    
+    if (mouseIsPressed && mouseX>redlinetime-10 && mouseX<redlinetime+10 && mouseY>height-40 && mouseY<height-30) {
+        redlinetime=mouseX;
+    }
+    
+    if (mouseIsPressed && mouseX>redlinetime-10 && mouseX<redlinetime+10 && mouseY>height-40 && mouseY<height-30 && mouseX<90) {
+        redlinetime=90;
+    }
+    
+    if (mouseIsPressed && mouseX>redlinetime-10 && mouseX<redlinetime+10 && mouseY>height-40 && mouseY<height-30 && mouseX>width-65) {
+        redlinetime=width-65;
+    }
+};
+
+var stopsign = function(visib) {
+    fill(0, 0, 0, visib);
+    noStroke();
+    ellipse(width/2,height/2,100,100);
+    fill(255, 255, 255, visib);
+    rect(width/2-20,height/2-25,10,50);
+    rect(width/2+10,height/2-25,10,50);
+};
+
+var startsign = function(visib) {
+    fill(0, 0, 0, visib);
+    noStroke();
+    ellipse(width/2,height/2,100,100);
+    fill(255, 255, 255, visib);
+    triangle(width/2+25,height/2,width/2-15,height/2-25,width/2-15,height/2+25);
+};
+
+draw = function() {
+    background(255, 255, 255);
+    //CHANGE ANYTHING BEYOND THIS POINT TO "END"
+    noStroke();
+    fill(0, 0, 0);
+    textSize(50);
+    if (redlinetime<180) {
+        text("Hello",300,200);
+    }
+    if (redlinetime<270 && redlinetime>=180) {
+        text("This is a video.",300,200);
+    }
+    if (redlinetime<360 && redlinetime>=270) {
+        text("Did you notice?",300,200);
+    }
+    if (redlinetime<460 && redlinetime>=360) {
+        text("Explore what\nyou can do",300,200);
+    }
+    if (redlinetime<535 && redlinetime>=460) {
+        text("Try everything",300,200);
+    }
+    //END - DO NOT CHANGE ANYTHING BEYOND THIS
+    startstopbar();
+    stopsign(stopsignvisib);
+    startsign(startsignvisib);
+    if (stopsignvisib>0) {
+        stopsignvisib-=4;
+    }
+    if (startsignvisib>0) {
+        startsignvisib-=4;
+    }
+};
+
+mouseClicked=function() {
+    //rect(50,350,520,30,20);
+    if (mouseX>59 && mouseX<76 && mouseY>height-45 && mouseY<height-24 && play===false) {
+        play=true;
+        startsignvisib=255;
+    } else if (mouseX>59 && mouseX<76 && mouseY>height-45 && mouseY<height-24 && play===true) {
+        play=false;
+        stopsignvisib=255;
+    }
+    if (mouseX>90 && mouseX<535 && mouseY>height-40 && mouseY<height-30) {
+        redlinetime=mouseX;
+    }
+};
+
+println("This program is made by TheTVGuy. All use must be used with permission by the\nowner. Use this link to reach TheTvGuy.\nhttps://www.khanacademy.org/profile/thetvguy/\n\nOriginal Video Control program can be found here:\nhttps://www.khanacademy.org/computer-programming/video-control/6568865494106112");
