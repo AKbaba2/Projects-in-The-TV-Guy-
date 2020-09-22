@@ -1,0 +1,127 @@
+//https://www.bing.com/images/search?view=detailV2&ccid=6HPRymbe&id=3290C75DFB4B3D9AC265091AE55C879B612BD8BD&thid=OIP.6HPRymbeMvLpvIRoJW04jgHaEt&mediaurl=http%3a%2f%2fcloudlock.com%2fwp-content%2fuploads%2f2014%2f03%2fSchool-Graphic.png&exph=1765&expw=2772&q=school+graphic&simid=608052352771034065&selectedIndex=0&ajaxhist=0
+
+var school = function(x,y,scalx,scaly,hour,min) {
+    pushMatrix();
+    translate(x,y);
+    scale(scalx,scaly);
+    
+    noStroke();
+    fill(203, 172, 118);
+    rect(-300,-150,600,320);//side buildings
+    
+    {
+    fill(201, 244, 255);
+    stroke(255, 255, 255);
+    strokeWeight(3);
+    for (var i = -285; i <=-115; i +=60) {
+        for (var e = -120; e <=100; e+=75) {
+            rect(i,e,50,55);
+            rect(-i-50,e,50,55);
+        }
+    }
+    noStroke();
+    }//WINDOWS
+    
+    {
+    fill(183, 152, 98);
+    rect(-100,-170,200,340);//middle building
+    rect(-110,-180,220,10);//middle roof
+    rect(-120,-200,240,20);//middle roof
+    }//MIDDLE BUILDING
+    
+    {
+    fill(230, 0, 0);
+    rect(-51,45,50,100);//door
+    rect(1,45,50,100);//door
+    fill(175, 255, 255);
+    stroke(255);
+    rect(-44,50,35,40);//window
+    rect(8,50,35,40);//window
+    stroke(0);
+    point(-5,100);//door knob
+    point(5,100);//door knob
+    noStroke();
+    }//DOORS
+    
+    {
+    fill(203, 172, 118);
+    rect(-60,20,120,20);
+    fill(0, 0, 0);
+    textAlign(CENTER,CENTER);
+    text("EASYHILL H.S",0,31);
+    }//NAMEPLATE
+    
+    {
+    fill(79, 55, 55);
+    rect(-70,148,140,10);
+    rect(-75,159,150,10);
+    rect(-80,170,160,10);
+    }//STAIRS
+    
+    {
+    fill(237, 237, 237);
+    ellipse(0,-100,100,100);//clock face
+    stroke(0, 0, 0);
+    strokeWeight(5);
+    point(0,-140);
+    point(0,-60);
+    point(-40,-100);
+    point(40,-100);
+    strokeWeight(3);
+    pushMatrix(); {
+        translate(0,-100);
+        rotate(hour*30);
+        line(0,0,0,-20);//hour hand
+        rotate((-hour*30)+min*6);
+        line(0,0,0,-30);//min hand
+    } popMatrix();//hands
+    }//CLOCK
+    
+    noStroke();
+    
+    for (var s = -255; s <= -145; s +=55) {
+        fill(99,55,0);
+        rect(s,145,10,50);
+        rect(s+400,145,10,50);
+    }
+    
+    for (var j = -250; j <=-140; j +=110) {
+        fill(0, 100, 0);
+        ellipse(j,145,75,75);
+        ellipse(j+400,145,75,75);
+    }
+    
+    for (var k = -195; k <=205; k +=400) {
+        fill(0, 150, 0);
+        ellipse(k,140,85,85);
+    }
+    popMatrix();
+};
+
+draw = function() {
+    background(201, 244, 255);
+    noStroke();
+    fill(0, 200, 0);
+    rect(0,370,600,30);
+    school(width/2, height/2 , width/600, height/400, hour(), minute());
+    fill(199, 199, 199);
+    quad(220,380,380,380,390,400,210,400);
+    
+    /*for (var s = 45; s <= 155; s +=55) {
+        fill(99,55,0);
+        rect(s,345,10,50);
+        rect(s+400,345,10,50);
+    }
+    
+    for (var j = 50; j <=160; j +=110) {
+        fill(0, 100, 0);
+        ellipse(j,345,75,75);
+        ellipse(j+400,345,75,75);
+    }
+    
+    for (var k = 105; k <=505; k +=400) {
+        fill(0, 150, 0);
+        ellipse(k,340,85,85);
+    }*/
+    
+};
