@@ -1,0 +1,269 @@
+var person = function(x,y,scal,rot,rightTopArm, rightBottomArm, leftTopArm, leftBottomArm, rightTopLeg, rightBottomLeg, leftTopLeg, leftBottomLeg, shirtColor, pantColor, shoeColor, shoe, eyeX, eyeY, eyeColor, hairColor, backtwist) {
+    pushMatrix();
+    translate(x,y);
+    scale(scal);
+    rotate(rot);
+    strokeWeight(1);
+    
+    pushMatrix(); {
+        
+    noStroke();
+    translate(30,205);
+    rotate(rightTopLeg+90);
+    fill(pantColor);
+    rect(-15,-15,100,30,20);//right top leg
+    stroke(0, 0, 0);
+    line(-5,-15,70,-15);
+    line(-5,15,70,15);
+    noStroke();
+    translate(70,0);
+    rotate(rightBottomLeg);
+    rect(-15,-15,100,30,20);//right bottom leg
+    fill(255, 209, 168);
+    stroke(0, 0, 0);
+    line(-5,-15,70,-15);
+    line(-5,15,70,15);
+    arc(70,0,30,30,-90,90);
+    
+    if (shoe===true) {
+    fill(shoeColor);
+    rotate(-90);
+    beginShape(); {
+    vertex(-15,70);
+    vertex(15,70);
+    vertex(40,75);
+    vertex(45,80);
+    vertex(47,85);
+    vertex(47,95);
+    vertex(-10,95);
+    vertex(-14,90);
+    vertex(-15,85);
+    vertex(-15,70);
+    } endShape();//SHOE
+    } else if (shoe===false) {
+    fill(255, 209, 168);
+    rotate(-90);
+    beginShape(); {
+    vertex(-15,70);
+    vertex(15,70);
+    vertex(17,75);
+    vertex(23,77);
+    vertex(41,80);
+    vertex(46,85);
+    vertex(47,93);
+    vertex(44,95);
+    vertex(-10,95);
+    vertex(-14,90);
+    vertex(-15,85);
+    vertex(-15,70);
+    } endShape();//SHOE
+    }
+    
+    } popMatrix();//RIGHT LEG
+    
+    pushMatrix(); {
+        
+    noStroke();
+    translate(-30,205);
+    rotate(leftTopLeg+90);
+    fill(pantColor);
+    rect(-15,-15,100,30,20);//left top leg
+    stroke(0, 0, 0);
+    line(-5,-15,70,-15);
+    line(-5,15,70,15);
+    noStroke();
+    translate(70,0);
+    rotate(leftBottomLeg);
+    rect(-15,-15,100,30,20);//left bottom leg
+    fill(255, 209, 168);
+    stroke(0, 0, 0);
+    line(-5,-15,70,-15);
+    line(-5,15,70,15);
+    arc(70,0,30,30,-90,90);
+    
+    if (shoe===true) {
+    fill(shoeColor);
+    rotate(-90);
+    beginShape(); {
+    vertex(15,70);
+    vertex(-15,70);
+    vertex(-40,75);
+    vertex(-45,80);
+    vertex(-47,85);
+    vertex(-47,95);
+    vertex(10,95);
+    vertex(14,90);
+    vertex(15,85);
+    vertex(15,70);
+    } endShape();//SHOE
+    } else if (shoe===false) {
+    fill(255, 209, 168);
+    rotate(-90);
+    beginShape(); {
+    vertex(15,70);
+    vertex(-15,70);
+    vertex(-17,75);
+    vertex(-23,77);
+    vertex(-41,80);
+    vertex(-46,85);
+    vertex(-47,93);
+    vertex(-44,95);
+    vertex(10,95);
+    vertex(14,90);
+    vertex(15,85);
+    vertex(15,70);
+    } endShape();//SHOE
+    }
+    
+    } popMatrix();//LEFT LEG
+    
+    stroke(0, 0, 0);
+    fill(shirtColor);
+    
+    pushMatrix(); {
+    beginShape(); {
+    vertex(50,120);
+    vertex(50,210);
+    vertex(46,216);
+    vertex(40,220);
+    vertex(-40,220);
+    vertex(-46,216);
+    vertex(-50,210);
+    vertex(-50,120);
+    
+    } endShape();//LOWER TORSO
+    } popMatrix();//LOWER TORSO
+    
+    pushMatrix(); {
+    beginShape(); {
+    translate(0,120);
+    rotate(backtwist);
+    vertex(-50,0);
+    vertex(-50,-90);
+    vertex(-46,-96);
+    vertex(-40,-100);
+    vertex(40,-100);
+    vertex(46,-96);
+    vertex(50,-90);
+    vertex(50,0);
+    } endShape();//UPPER TORSO
+    fill(255, 0, 0);
+    arc(0,0,100,100,0,-backtwist);
+    arc(0,0,100,100,180-backtwist,180);
+    translate(0,-120);
+    }// UPPER TORSO
+    
+    fill(255, 209, 168);
+    ellipse(0,-10,125,125);//head
+    
+    beginShape(); {
+    vertex(0,-20);
+    vertex(-5,0);
+    vertex(0,0);
+    } endShape();//NOSE
+    {
+    fill(255, 255, 255);
+    ellipse(-20,-30,20,15);//white eye
+    ellipse(20,-30,20,15);//white eye
+    noStroke();
+    fill(eyeColor);
+    ellipse(eyeX-20,eyeY,10,10);//color eye
+    ellipse(eyeX+20,eyeY,10,10);//color eye
+    fill(0, 0, 0);
+    ellipse(eyeX-20,eyeY,5,5);//black eye
+    ellipse(eyeX+20,eyeY,5,5);//black eye
+    //fill(255, 209, 168);
+    //ellipse(-20,-30,20,15);
+    //ellipse(20,-30,20,15);
+    }//EYES
+    {
+    noFill();
+    stroke(hairColor);
+    strokeWeight(6);
+    arc(0,-10,125,125,210,330);
+    fill(hairColor);
+    bezier(-52,-45,-35,-82,35,-82,52,-45);
+    }//HAIR
+    
+    noFill();
+    strokeWeight(5);
+    stroke(0, 0, 0);
+    arc(0,0,50,50,40,140);//MOUTH
+    strokeWeight(1);
+    
+    pushMatrix(); {
+    
+    noStroke();
+    translate(50,60);
+    rotate(rightTopArm);
+    fill(shirtColor);
+    rect(-15,-15,100,30,20);//right top arm
+    stroke(0, 0, 0);
+    line(-5,-15,70,-15);
+    line(-5,15,70,15);
+    arc(0,0,30,30,-90-rightTopArm,-90);
+    if (rightTopArm<=0) {
+        arc(0,0,30,30,90,90+(abs(rightTopArm)));
+    }
+    noStroke();
+    translate(70,0);
+    rotate(rightBottomArm);
+    rect(-15,-15,100,30,20);//right bottom arm
+    fill(255, 209, 168);
+    stroke(0, 0, 0);
+    line(-5,-15,70,-15);
+    line(-5,15,70,15);
+    arc(70,0,30,30,-90,90);
+    noFill();
+    arc(0,0,30,30,-90-rightBottomArm,-90);
+    if (rightBottomArm<=0) {
+        arc(0,0,30,30,90,90+(abs(rightBottomArm)));
+    }
+    noStroke();
+    
+    } popMatrix();//RIGHT ARM
+    
+    pushMatrix(); {
+    
+    noStroke();
+    translate(-50,60);
+    rotate(180);
+    rotate(leftTopArm);
+    fill(shirtColor);
+    rect(-15,-15,100,30,20);//left top arm
+    stroke(0, 0, 0);
+    line(-5,-15,70,-15);
+    line(-5,15,70,15);
+    arc(0,0,30,30,-90-leftTopArm,-90);
+    if (leftTopArm<=0) {
+        arc(0,0,30,30,90,90+(abs(leftTopArm)));
+    }
+    noStroke();
+    translate(70,0);
+    rotate(leftBottomArm);
+    rect(-15,-15,100,30,20);//left bottom arm
+    fill(255, 209, 168);
+    stroke(0, 0, 0);
+    line(-5,-15,70,-15);
+    line(-5,15,70,15);
+    arc(70,0,30,30,-90,90);
+    noFill();
+    arc(0,0,30,30,-90-leftBottomArm,-90);
+    if (leftBottomArm<=0) {
+        arc(0,0,30,30,90,90+(abs(leftBottomArm)));
+    }
+    noStroke();
+    
+    } popMatrix();//LEFT ARM
+    
+    popMatrix();
+    
+    popMatrix();
+};
+
+draw = function() {
+    background(255, 255, 255);
+    person(250, 100, 1.0/*scale*/, 0/*rotate*/, 0/*rightTopArm*/, 0/*rightBottomArm*/, 0/*leftTopArm*/, 0/*leftBottomArm*/, 0/*rightTopLeg*/, 0/*rightBottomLeg*/, 0/*leftTopLeg*/, 0/*leftBottomLeg*/, color(255, 0, 0)/*shirtcolor*/, color(0, 0, 255)/*pantcolor*/, color(19, 112, 11)/*shoecolor*/, false/*shoe*/, 0/*eyeX*/, -30/*eyeY*/, color(150, 75, 0)/*eyecolor*/, color(150, 75, 0)/*haircolor*/, 0/*backtwist*/);
+    
+    //background(255, 255, 255);
+};
