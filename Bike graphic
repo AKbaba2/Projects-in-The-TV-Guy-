@@ -1,0 +1,77 @@
+var bike = function(x,y,scalx,scaly,rot,spin) {
+    pushMatrix();
+    translate(x,y);
+    scale(scalx,scaly);
+    rotate(rot);
+    noFill();
+    stroke(0, 0, 0);
+    strokeWeight(10);
+    point(-100,50);//left wheel point
+    point(100,50);//right wheel point
+    strokeWeight(5);
+    ellipse(-100,50,100,100);//left wheel
+    ellipse(100,50,100,100);//right wheel
+    ellipse(5,60,30,30);//wheel turner
+    pushMatrix(); {
+    translate(5,60);
+    rotate(spin);
+    for (var i = 0; i < 360; i +=72) {
+        rotate(72);
+        line(0,0,0,-15);
+    }
+    } popMatrix();//gears
+    line(-15,-40,5,60);//seat bar
+    line(-10,-20,75,-25);//seat to handle
+    line(75,-40,90,30);//handle bar
+    line(100,50,90,30);//short R wheel line
+    arc(75,-25,43,31,-90,18);//handle
+    ellipse(-20,-45,50,5);//seat
+    ellipse(-44,-48,5,5);//seat backrest
+    strokeWeight(3);
+    line(-100,50,-10,-20);//L wheel to seat
+    strokeWeight(4);
+    line(-100,50,5,60);//wheel turner to wheel
+    line(80,-15,5,60);//wheel turner to handle
+    strokeWeight(2);
+    line(-100,46,5,45);//wheel turner line
+    line(-100,54,5,75);//wheel turner line
+    line(74,-30,80,-31);//handle decoration
+    pushMatrix(); {
+    translate(-100,50);
+    rotate(spin/3);
+    for (var s = 0; s <= 360; s +=40) {
+        rotate(40);
+        line(0,0,0,-50);
+    }
+    } popMatrix();//L sector
+    pushMatrix(); {
+    translate(100,50);
+    rotate(spin/3);
+    for (var s = 0; s <= 360; s +=40) {
+        rotate(40);
+        line(0,0,0,-50);
+    }
+    } popMatrix();//R sector
+    strokeWeight(5);
+    pushMatrix();
+    translate(5,60);
+    rotate(spin);
+    line(0,0,0,30);//pedal line
+    line(0,0,0,-30);//pedal line
+    pushMatrix();
+    translate(0,30);
+    rotate(-spin);
+    line(-5,0,5,0);//pedal
+    popMatrix();
+    pushMatrix();
+    translate(0,-30);
+    rotate(-spin);
+    line(-5,0,5,0);//pedal
+    popMatrix();
+    popMatrix();
+    popMatrix();
+};
+draw = function() {
+    background(255, 255, 255);
+    bike(300, 200, 1, 1, 0, 0);
+};
