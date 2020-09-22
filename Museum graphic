@@ -1,0 +1,132 @@
+var museum = function(x,y,scalx,scaly,hour,min) {
+    pushMatrix();
+    translate(x,y);
+    scale(scalx,scaly);
+    fill(255, 255, 255);
+    strokeWeight(3);
+    stroke(59, 59, 59);
+    rect(-280,-100,560,290);//building
+    
+    {
+    rect(-290,-90,580,10);
+    rect(-290,-110,580,10);
+    quad(-290,-110,-295,-130,295,-130,290,-110);
+    rect(-150,-105,300,35);//nameplate
+    quad(-150,-105,-160,-115,160,-115,150,-105);
+    triangle(-160,-115,160,-115,0,-195);
+    triangle(-125,-115,125,-115,0,-175);
+    ellipse(0,-143.5,40,40);
+    pushMatrix();
+    translate(0,-143.5);
+    point(0,0);
+    for (var s = 0; s <360; s +=90) {
+        rotate(90);
+        line(0,-16,0,-20);
+    }
+    rotate(hour*30);
+    line(0,0,0,-5);
+    rotate(-(hour*30)+(min*6));
+    line(0,0,0,-9);
+    popMatrix();
+    }//roof design
+    
+    {
+    rect(-150,100,300,90);
+    for (var i = 100; i <160;i+=10) {
+        rect(-55,i,110,10);
+    }
+    rect(-60,160,120,10);
+    rect(-70,170,140,10);
+    rect(-80,180,160,10);
+    rect(-170,100,125,15);
+    rect(45,100,125,15);
+    }//stairs
+    
+    {
+    for (var m = -143; m <= -68; m += 70) {
+        rect(m-7,80,40,20,2);
+        arc(m+13,77,30,30,176,364);
+        rect(m-2,55,30,10,2);
+        rect(m,-25,26,80,2);
+        rect(m-7,-70,40,20,2);
+        arc(m+13,-47,30,30,-4,184);
+        rect(m-2,-35,30,10,2);
+    }
+    for (var m = 47; m <= 117; m += 70) {
+        rect(m-7,80,40,20,2);
+        arc(m+13,77,30,30,176,364);
+        rect(m-2,55,30,10,2);
+        rect(m,-25,26,80,2);
+        rect(m-7,-70,40,20,2);
+        arc(m+13,-47,30,30,-4,184);
+        rect(m-2,-35,30,10,2);
+    }
+    }//pillars
+    
+    var windows = function(x,y,w,h) {
+        rect(x,y,w,h);
+        strokeWeight(2);
+        fill(201, 244, 255);
+        rect(x+7,y+10,w-14,h/5);
+        rect(x+7,((y)+h/5)+17,w-14,((0.75*(h-33))-0.25)+3);
+        fill(255, 255, 255);
+        strokeWeight(3);
+    };
+    
+    {
+    for (var w = -270; w <=-210; w+=60) {
+        for (var o = -70; o <=20; o +=90) {
+            windows(w,o,50,70);
+            windows(-w-50,o,50,70);
+        }
+    }
+    for (var b = -240; b <=190; b+=430) {
+        windows(b,104,50,70);
+    }
+    for (var t = -110; t <=80; t+=190) {
+        rect(t,-14,30,50,1);
+        strokeWeight(2);
+        fill(201, 244, 255);
+        rect(t+6,-9,19,15);
+        rect(t+6,11,19,20);
+        fill(255, 255, 255);
+        strokeWeight(3);
+    }
+    rect(-20,-60,40,50,1);
+    strokeWeight(2);
+    fill(201, 244, 255);
+    rect(-14,-55,29,15);
+    rect(-14,-34,29,20);
+    fill(255, 255, 255);
+    strokeWeight(3);
+    }//windows
+    
+    {
+    fill(250, 81, 3);
+    rect(-30,0,60,100,1);
+    strokeWeight(2);
+    rect(-25,10,20,15);
+    rect(5,10,20,15);
+    rect(-25,30,20,40);
+    rect(5,30,20,40);
+    rect(-25,75,20,15);
+    rect(5,75,20,15);
+    line(0,0,0,100);
+    strokeWeight(3);
+    }//door
+    
+    {
+    fill(0, 0, 0);
+    textAlign(CENTER,CENTER);
+    textFont(createFont("Comic sans ms"));
+    textSize(20);
+    text("NATIONAL MUSEUM",0,-87);
+    }//nameplate
+    
+    popMatrix();
+};
+
+draw = function() {
+    background(255, 255, 255);
+    museum(width/2,height/2,width/600,height/400,hour(),minute());
+};
