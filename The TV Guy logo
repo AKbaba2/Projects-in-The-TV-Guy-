@@ -1,0 +1,73 @@
+var logoTimer = 0;
+var presentsScale = 0;
+var presentsRotate = 0;
+var logo = function(x,y,power) {
+    pushMatrix();
+    translate(x,y);
+    scale(1);
+    logoTimer++;
+    stroke(0, 0, 0);
+    {
+    strokeWeight(10);
+    line(-110,-150,-125,-215);//t
+    line(-100,-231,-145,-200);//t
+    line(50,-150,0,-230);
+    line(50,-150,107,-190);
+    }//antennas
+    strokeWeight(1);
+    fill(0, 0, 0);
+    rect(-280,-150,560,330,10);//tv whole
+    fill(255, 255, 255);
+    rect(-250,-120,400,270,10);//screen
+    ellipse(215,-30,50,50);
+    ellipse(215,50,50,50);
+    textSize(25);
+    text("Power",200,-125);
+    noStroke();
+    if (logoTimer<=60) {
+    for (var s = -250; s <=145; s+=5) {
+        for (var t = -120; t <=145; t+=5) {
+            fill(random(250));
+            rect(s,t,5,5);
+        }
+    }
+    }
+    else {
+        fill(0, 0, 0);
+        textSize(50);
+        text("THE TV GUY",-50,-30);
+        pushMatrix();
+        translate(-50,60);
+        scale(presentsScale);
+        rotate(presentsRotate);
+        text("PRESENTS",0,0);
+        if (logoTimer>=80) {
+            if (presentsScale<=1) {
+                presentsScale+=0.05;
+            }
+            if (presentsRotate<360) {
+                presentsRotate+=18;
+            }
+        }
+        popMatrix();
+    }
+    if (power===true) {
+        fill(0, 255, 0, 25.5);
+    } else {
+        fill(255, 0, 0, 25.5);
+    }
+    noStroke();
+    for (var i = 0; i <25; i++) {
+        ellipse(255,-123,i,i);
+    }
+    noFill();
+    stroke(0, 0, 0);
+    strokeWeight(10);
+    rect(-250,-120,400,270,15);//screen
+    popMatrix();
+};
+draw = function() {
+    background(255, 255, 255);
+    textAlign(CENTER,CENTER);
+    logo(300,200,true);
+};
